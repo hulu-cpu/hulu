@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hulu Cube</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { background-color: #242424; color: #F1F1F1; height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .screen { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
+    #login-screen { background-color: #242424; display: flex; }
+    #id-screen { background-color: #242424; }
+    input[type="text"], input[type="password"] {
+      padding: 10px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 200px;
+      background-color: #F1F1F1;
+      color: #242424;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #5C9730;
+      color: #F1F1F1;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .hulu-logo {
+      margin-bottom: 20px;
+    }
+    #watch-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #watch-input {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-screen" class="screen">
+    <div class="hulu-logo">
+      <svg viewBox="0 -2 61 24" height="48" width="122" role="img" fill="rgb(92, 151, 48)">
+        <title>hulu</title>
+        <path d="M9.57046613 6.24096927h-3.1015504c-1.0875017 0-1.63435327.29263768-1.63435327.29263768V0H0v20h4.83456246v-8.0704467c0-.7137436.58067743-1.29171 1.2958127-1.29171h2.81374862c.7162628 0 1.29524892.5779664 1.29524892 1.29171V20h4.8359719v-8.6950777c0-3.65670596-2.4444829-5.06395303-5.50487847-5.06395303zm46.48012787 0v8.06932223c0 .714868-.579268 1.2931156-1.294967 1.2931156h-2.8134668c-.7162628 0-1.2952489-.5782476-1.2952489-1.2931156V6.24096927h-4.8368175V14.712844c0 3.4627386 2.2220777 5.287156 5.5062878 5.287156h4.7347762v-.0247379c3.0245965 0 4.8354081-2.1465718 4.8354081-5.2624181V6.24096927H56.050594zM28.7728487 14.3102915c0 .714868-.5798318 1.2931156-1.2955308 1.2931156h-2.8137486c-.7162628 0-1.2955308-.5782476-1.2955308-1.2931156V6.24096927h-4.8359719V14.712844c0 3.4627386 2.2220778 5.287156 5.506006 5.287156h4.7347761v-.0247379c3.0248785 0 4.8359719-2.1465718 4.8359719-5.2624181V6.24096927h-4.8359719v8.06932223zM37.294431 20h4.8365357V0H37.294431v20z" fill-rule="evenodd"></path>
+      </svg>
+    </div>
+    <form id="login-form">
+      <input type="text" placeholder="Username" id="username" required>
+      <input type="password" placeholder="Password" id="password" required>
+      <button type="submit">Log In</button>
+    </form>
+  </div>
+
+  <div id="id-screen" class="screen">
+    <div class="hulu-logo">
+      <svg viewBox="0 -2 61 24" height="48" width="122" role="img" fill="rgb(92, 151, 48)">
+        <title>hulu</title>
+        <path d="M9.57046613 6.24096927h-3.1015504c-1.0875017 0-1.63435327.29263768-1.63435327.29263768V0H0v20h4.83456246v-8.0704467c0-.7137436.58067743-1.29171 1.2958127-1.29171h2.81374862c.7162628 0 1.29524892.5779664 1.29524892 1.29171V20h4.8359719v-8.6950777c0-3.65670596-2.4444829-5.06395303-5.50487847-5.06395303zm46.48012787 0v8.06932223c0 .714868-.579268 1.2931156-1.294967 1.2931156h-2.8134668c-.7162628 0-1.2952489-.5782476-1.2952489-1.2931156V6.24096927h-4.8368175V14.712844c0 3.4627386 2.2220777 5.287156 5.5062878 5.287156h4.7347762v-.0247379c3.0245965 0 4.8354081-2.1465718 4.8354081-5.2624181V6.24096927H56.050594zM28.7728487 14.3102915c0 .714868-.5798318 1.2931156-1.2955308 1.2931156h-2.8137486c-.7162628 0-1.2955308-.5782476-1.2955308-1.2931156V6.24096927h-4.8359719V14.712844c0 3.4627386 2.2220778 5.287156 5.506006 5.287156h4.7347761v-.0247379c3.0248785 0 4.8359719-2.1465718 4.8359719-5.2624181V6.24096927h-4.8359719v8.06932223zM37.294431 20h4.8365357V0H37.294431v20z" fill-rule="evenodd"></path>
+      </svg>
+    </div>
+    <div id="watch-container">
+      <div id="watch-input">
+        <input type="text" id="content-id" placeholder="Enter Movie/Show ID to play it">
+        <button id="submit-btn">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('login-form')
+    const loginScreen = document.getElementById('login-screen')
+    const idScreen = document.getElementById('id-screen')
+    const submitBtn = document.getElementById('submit-btn')
+    const contentId = document.getElementById('content-id')
+
+    if (!sessionStorage.getItem('loggedIn')) {
+      loginScreen.style.display = 'flex'
+    } else {
+      idScreen.style.display = 'flex'
+    }
+
+    loginForm.onsubmit = function(e) {
+      e.preventDefault()
+      sessionStorage.setItem('loggedIn', 'true')
+      sessionStorage.removeItem('watching')
+      loginScreen.style.display = 'none'
+      idScreen.style.display = 'flex'
+    }
+
+    submitBtn.onclick = function() {
+      const id = contentId.value.trim()
+      if (id) {
+        sessionStorage.setItem('watching', 'true')
+        sessionStorage.setItem('lastScreen', 'idScreen')
+        window.location.href = `https://www.hulu.com/watch/${id}`
+      }
+    }
+
+    if (sessionStorage.getItem('watching') && !sessionStorage.getItem('loggedIn')) {
+      sessionStorage.removeItem('watching')
+      sessionStorage.removeItem('lastScreen')
+      window.location.href = location.origin + location.pathname
+    }
+
+    window.onpopstate = function() {
+      if (sessionStorage.getItem('lastScreen') === 'idScreen') {
+        location.href = location.origin + location.pathname
+      }
+    }
+  </script>
+</body>
+</html>
